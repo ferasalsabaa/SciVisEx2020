@@ -15,7 +15,7 @@ uniform sampler3D volume_texture;
 uniform sampler2D transfer_func_texture;
 
 uniform vec3    camera_location;
-uniform float   sampling_distance;;
+uniform float   sampling_distance;
 uniform float   iso_value;
 uniform float   iso_value_2;
 uniform vec3    max_bounds;
