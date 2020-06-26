@@ -720,12 +720,12 @@ void showGUI(){
 
             std::ofstream tf_file;
 
-            if (save_tf_1){ tf_file.open("TF1", std::ios::out | std::ofstream::binary); }
-            if (save_tf_2){ tf_file.open("TF2", std::ios::out | std::ofstream::binary); }
-            if (save_tf_3){ tf_file.open("TF3", std::ios::out | std::ofstream::binary); }
-            if (save_tf_4){ tf_file.open("TF4", std::ios::out | std::ofstream::binary); }
-            if (save_tf_5){ tf_file.open("TF5", std::ios::out | std::ofstream::binary); }
-            if (save_tf_6){ tf_file.open("TF6", std::ios::out | std::ofstream::binary); }
+            if (save_tf_1){ tf_file.open("TF1.tf", std::ios::out | std::ofstream::binary); }
+            if (save_tf_2){ tf_file.open("TF2.tf", std::ios::out | std::ofstream::binary); }
+            if (save_tf_3){ tf_file.open("TF3.tf", std::ios::out | std::ofstream::binary); }
+            if (save_tf_4){ tf_file.open("TF4.tf", std::ios::out | std::ofstream::binary); }
+            if (save_tf_5){ tf_file.open("TF5.tf", std::ios::out | std::ofstream::binary); }
+            if (save_tf_6){ tf_file.open("TF6.tf", std::ios::out | std::ofstream::binary); }
 
             //std::copy(save_vect.begin(), save_vect.end(), std::ostreambuf_iterator<char>(tf_file));
             tf_file.write((char*)&save_vect[0], sizeof(Transfer_function::element_type) * save_vect.size());
@@ -738,12 +738,12 @@ void showGUI(){
 
             std::ifstream tf_file;
 
-            if (load_tf_1){ tf_file.open("TF1", std::ios::in | std::ifstream::binary); }
-            if (load_tf_2){ tf_file.open("TF2", std::ios::in | std::ifstream::binary); }
-            if (load_tf_3){ tf_file.open("TF3", std::ios::in | std::ifstream::binary); }
-            if (load_tf_4){ tf_file.open("TF4", std::ios::in | std::ifstream::binary); }
-            if (load_tf_5){ tf_file.open("TF5", std::ios::in | std::ifstream::binary); }
-            if (load_tf_6){ tf_file.open("TF6", std::ios::in | std::ifstream::binary); }
+            if (load_tf_1){ tf_file.open("TF1.tf", std::ios::in | std::ifstream::binary); }
+            if (load_tf_2){ tf_file.open("TF2.tf", std::ios::in | std::ifstream::binary); }
+            if (load_tf_3){ tf_file.open("TF3.tf", std::ios::in | std::ifstream::binary); }
+            if (load_tf_4){ tf_file.open("TF4.tf", std::ios::in | std::ifstream::binary); }
+            if (load_tf_5){ tf_file.open("TF5.tf", std::ios::in | std::ifstream::binary); }
+            if (load_tf_6){ tf_file.open("TF6.tf", std::ios::in | std::ifstream::binary); }
 
 
             if (tf_file.good()){
