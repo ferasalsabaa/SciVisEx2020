@@ -142,7 +142,7 @@ int count = 0;
 
        if (s > max_threshold){
         max_threshold = s;
-                    vec4 color = texture(transfer_func_texture, vec2(max_threshold, max_threshold));
+            vec4 color = texture(transfer_func_texture, vec2(max_threshold, max_threshold));
             out_col = color;
             out_col = vec4(1,1,1,1*max_threshold);
         }
@@ -154,9 +154,7 @@ int count = 0;
         sampling_pos  += ray_increment;
 
         // update the loop termination condition
-        inside_volume  = inside_volume_bounds(sampling_pos);
-
-     
+        inside_volume  = inside_volume_bounds(sampling_pos);     
     }
 #endif
 
