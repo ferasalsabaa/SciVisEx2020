@@ -107,8 +107,12 @@ int count = 0;
     {      
         // get sample
         float s = sample_data_volume(sampling_pos);
+
+        if (s > 0.33f){
         average += s;
         count ++;
+        }
+
 
         // increment the ray sampling position
         sampling_pos  += ray_increment;
