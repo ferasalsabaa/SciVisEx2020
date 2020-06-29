@@ -113,7 +113,6 @@ int count = 0;
         count ++;
         }
 
-
         // increment the ray sampling position
         sampling_pos  += ray_increment;
 
@@ -131,21 +130,33 @@ int count = 0;
 
 #if TASK == 12 // Task 1.2: Angiogram
 
+     float max_threshold = 0.33f;
+
     // the traversal loop,
     // termination when the sampling position is outside volume boundary
     while (inside_volume)
     {      
+        
         // get sample
         float s = sample_data_volume(sampling_pos);
 
+       if (s > max_threshold){
+        max_threshold = s;
+                    vec4 color = texture(transfer_func_texture, vec2(max_threshold, max_threshold));
+            out_col = color;
+            out_col = vec4(1,1,1,1*max_threshold);
+        }
+
         // dummy code
-        out_col = vec4(0.0,1.0,0.0,1.0);
+        // out_col = vec4(0.0,1.0,0.0,1.0);
 
         // increment the ray sampling position
         sampling_pos  += ray_increment;
 
         // update the loop termination condition
         inside_volume  = inside_volume_bounds(sampling_pos);
+
+     
     }
 #endif
 
