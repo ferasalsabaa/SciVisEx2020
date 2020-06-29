@@ -99,21 +99,29 @@ void main()
     
 #if TASK == 11 // Task 1.1: X-Ray
 
+float average = 0.0f;
+int count = 0;
     // the traversal loop,
     // termination when the sampling position is outside volume boundary
     while (inside_volume)
     {      
         // get sample
         float s = sample_data_volume(sampling_pos);
-
-        // dummy code
-        out_col = vec4(1.0,0.0,0.0,1.0);
+        average += s;
+        count ++;
 
         // increment the ray sampling position
         sampling_pos  += ray_increment;
 
         // update the loop termination condition
         inside_volume  = inside_volume_bounds(sampling_pos);
+
+        if(!inside_volume){
+            average /= count;
+            vec4 color = texture(transfer_func_texture, vec2(average, average));
+            out_col = color;
+            out_col = vec4(1,1,1,1*average);
+        }
     }
 #endif
 
