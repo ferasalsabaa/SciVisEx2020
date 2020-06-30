@@ -27,6 +27,8 @@ uniform vec3    light_diffuse_color;
 uniform vec3    light_specular_color;
 uniform float   light_ref_coef;
 
+int count = 0;
+
 
 bool
 inside_volume_bounds(const in vec3 sampling_position)
@@ -42,6 +44,12 @@ sample_data_volume(vec3 in_sampling_pos)
     vec3 obj_to_tex = vec3(1.0) / max_bounds;
     return texture(volume_texture, in_sampling_pos * obj_to_tex).r;
 
+}
+
+int
+map(long x, long in_min, long in_max, long out_min, long out_max)
+{
+  return  (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
 void main()
@@ -100,7 +108,7 @@ void main()
 #if TASK == 11 // Task 1.1: X-Ray
 
 float average = 0.0f;
-int count = 0;
+
     // the traversal loop,
     // termination when the sampling position is outside volume boundary
     while (inside_volume)
@@ -141,7 +149,8 @@ int count = 0;
         float s = sample_data_volume(sampling_pos);
 
        if (s > max_threshold){
-        max_threshold = s;
+           
+            max_threshold = s;
             vec4 color = texture(transfer_func_texture, vec2(max_threshold, max_threshold));
             out_col = color;
             out_col = vec4(1,1,1,1*max_threshold);
@@ -160,15 +169,24 @@ int count = 0;
 
 #if TASK == 13 // Task 1.3: First-Hit Iso-Surface Ray Traversal
 
+float result;
+int count =0;
     // the traversal loop,
     // termination when the sampling position is outside volume boundary
     while (inside_volume)
     {      
-        // get sample
+                // get sample
         float s = sample_data_volume(sampling_pos);
 
-        // dummy code
-        out_col = vec4(0.0,0.0,1.0,1.0);
+    if (s > 0.33f && count ==0){
+            count = 1;
+            result = s;
+        }
+
+
+            vec4 color = texture(transfer_func_texture, vec2(result, result));
+            out_col = color;
+            out_col = vec4(1,1,1,1*result);
 
 
 #if ENABLE_LIGHTNING == 1 // Task 1.5: Add illumination to iso-surface
